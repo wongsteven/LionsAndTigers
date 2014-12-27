@@ -103,10 +103,6 @@
                                 <exclude reference="5Xy-4X-X3E"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="43C-N4-x2a"/>
-                                <exclude reference="G72-8U-qgh"/>
-                                <exclude reference="dO4-Dn-nDu"/>
-                                <exclude reference="fQV-a9-r58"/>
                                 <exclude reference="Gcn-ar-9QW"/>
                                 <exclude reference="lyA-DC-tzq"/>
                                 <exclude reference="mdl-9d-2Rs"/>
@@ -118,10 +114,14 @@
                                 <exclude reference="ceY-Ug-RAf"/>
                                 <exclude reference="icn-eQ-PRe"/>
                                 <exclude reference="Ku1-qZ-Sgj"/>
-                                <exclude reference="Dd4-3c-3tv"/>
-                                <exclude reference="lV3-Y4-Vby"/>
                                 <exclude reference="8Cc-Sn-fe1"/>
                                 <exclude reference="Q6n-L1-Rea"/>
+                                <exclude reference="Dd4-3c-3tv"/>
+                                <exclude reference="lV3-Y4-Vby"/>
+                                <exclude reference="43C-N4-x2a"/>
+                                <exclude reference="G72-8U-qgh"/>
+                                <exclude reference="dO4-Dn-nDu"/>
+                                <exclude reference="fQV-a9-r58"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -134,10 +134,6 @@
                                 <include reference="5Xy-4X-X3E"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="43C-N4-x2a"/>
-                                <include reference="G72-8U-qgh"/>
-                                <include reference="dO4-Dn-nDu"/>
-                                <include reference="fQV-a9-r58"/>
                                 <include reference="Gcn-ar-9QW"/>
                                 <include reference="lyA-DC-tzq"/>
                                 <include reference="mdl-9d-2Rs"/>
@@ -149,10 +145,14 @@
                                 <include reference="ceY-Ug-RAf"/>
                                 <include reference="icn-eQ-PRe"/>
                                 <include reference="Ku1-qZ-Sgj"/>
-                                <include reference="Dd4-3c-3tv"/>
-                                <include reference="lV3-Y4-Vby"/>
                                 <include reference="8Cc-Sn-fe1"/>
                                 <include reference="Q6n-L1-Rea"/>
+                                <include reference="Dd4-3c-3tv"/>
+                                <include reference="lV3-Y4-Vby"/>
+                                <include reference="43C-N4-x2a"/>
+                                <include reference="G72-8U-qgh"/>
+                                <include reference="dO4-Dn-nDu"/>
+                                <include reference="fQV-a9-r58"/>
                             </mask>
                         </variation>
                     </view>

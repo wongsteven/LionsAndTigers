@@ -1,11 +1,3 @@
-//
-//  ViewController.swift
-//  LionsAndTigers
-//
-//  Created by Steven W on 12/10/14.
-//  Copyright (c) 2014 Steven W. All rights reserved.
-//
-
 import UIKit
 
 class ViewController: UIViewController {
@@ -17,109 +9,119 @@ class ViewController: UIViewController {
     @IBOutlet weak var randomFactLabel: UILabel!
     
     var myTigers:[Tiger] = []
-    var currentIndex = 0
+    var myLions:[Lion] = []
+    
+// sets the default value of the "currentAnimal" to be a "Tiger" with the index at 0
+    var currentAnimal = (species: "Tiger", index: 0)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        var myTiger = Tiger()
-        myTiger.name = "Tigger"
-        myTiger.age = 3
-        myTiger.breed = "Bengal"
-        myTiger.image = UIImage(named: "BengalTiger.jpg")
         
-        myTiger.age = myTiger.ageInTigerYearsFromAge(myTiger.age)
+// sets values for the "myTiger" instance
+        var firstTiger = Tiger(name: "Tigger",age: 3,breed: "Bengal",image: UIImage(named: "BengalTiger.jpg"))
         
-        myTiger.chuff()
-        myTiger.chuffANumberOfTimes(5, isLoud: false)
+// functions used from the Tiger struct
+        firstTiger.age = firstTiger.ageInTigerYearsFromAge(firstTiger.age)
+        firstTiger.chuff()
+        firstTiger.chuffANumberOfTimes(5, isLoud: false)
         
-        println("My Tiger's name is: \(myTiger.name), its' age is \(myTiger.age), its' breed is \(myTiger.breed) and its' image is \(myTiger.image!)")
+// displays the information on the initial page
+        self.myImageView.image = firstTiger.image
+        self.nameLabel.text = firstTiger.name
+        self.myAgeLabel.text = "\(firstTiger.age)"
+        self.myBreedLabel.text = firstTiger.breed
+        self.randomFactLabel.text = firstTiger.randomFact()
         
-        self.myImageView.image = myTiger.image
-        self.nameLabel.text = myTiger.name
-        self.myAgeLabel.text = "\(myTiger.age)"
-        self.myBreedLabel.text = myTiger.breed
-        self.randomFactLabel.text = myTiger.randomFact()
-        
-        var secondTiger = Tiger()
-        secondTiger.name = "Tigress"
-        secondTiger.age = 2
-        secondTiger.breed = "Indochinese Tiger"
-        secondTiger.image = UIImage(named: "IndochineseTiger.jpg")
-        
+// creation of other myTigers[array]
+        var secondTiger = Tiger(name: "Tigress",age: 2,breed: "Indochinese Tiger",image: UIImage(named: "IndochineseTiger.jpg"))
         secondTiger.age = secondTiger.ageInTigerYearsFromAge(secondTiger.age)
-        
         secondTiger.chuff()
         
-        var thirdTiger = Tiger()
-        thirdTiger.name = "Jacob"
-        thirdTiger.breed = "Malayan Tiger"
-        thirdTiger.age = 4
-        thirdTiger.image = UIImage(named: "MalayanTiger.jpg")
-        
+        var thirdTiger = Tiger(name:"Jacob",age:4,breed:"Malayan Tiger",image:UIImage(named: "MalayanTiger.jpg"))
         thirdTiger.age = thirdTiger.ageInTigerYearsFromAge(thirdTiger.age)
         thirdTiger.chuff()
         
-        var fourthTiger = Tiger()
-        fourthTiger.name = "Spar"
-        fourthTiger.breed = "Siberian Tiger"
-        fourthTiger.age = 5
-        fourthTiger.image = UIImage(named: "SiberianTiger.jpg")
-        
-        fourthTiger.age = fourthTiger.ageInTigerYearsFromAge(fourthTiger.age)
+        var fourthTiger = Tiger(name: "Spar",age: 5,breed: "Siberian Tiger",image: UIImage(named: "SiberianTiger.jpg"))
+        thirdTiger.age = fourthTiger.ageInTigerYearsFromAge(fourthTiger.age)
         fourthTiger.chuff()
         
-        // Shorthand way of writing the same code as shown above
-        var fifthTiger = Tiger(age: 7, name: "Shere Kahn", breed: "Bengal", image: UIImage(named: "BengalTiger.jpg"))
-        
+        var fifthTiger = Tiger(name: "Shere Kahn", age: 7, breed: "Bengal", image: UIImage(named: "BengalTiger.jpg"))
         fifthTiger.age = fifthTiger.ageInTigerYearsFromAge(fifthTiger.age)
         fifthTiger.chuff()
+
+// Adds all the tiger instances into the array "myTigers"
+        self.myTigers += [firstTiger, secondTiger,thirdTiger,fourthTiger,fifthTiger]
         
-        self.myTigers += [myTiger, secondTiger,thirdTiger,fourthTiger,fifthTiger]
+// Sets values for the "lion" instance
+        var lion = Lion()
+        lion.age = 4
+        lion.isAlphaMale = false
+        lion.image = UIImage(named: "Lion.jpg")
+        lion.name = "Mufasa"
+        lion.subSpecies = "West African"
+        
+        var lioness = Lion()
+        lioness.age = 3
+        lioness.isAlphaMale = false
+        lioness.image = UIImage(named: "Lioness.jpeg")
+        lioness.name = "Sarabi"
+        lioness.subSpecies = "Barbary"
+        
+// Functions used from the "lion" class
+        lion.roar()
+        lioness.roar()
+        
+// Adds all the tiger instances into the array "lions"
+        self.myLions += [lion,lioness]
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-    @IBAction func nextBarButtonPressed(sender: AnyObject) {
-        
-// Code to generate random but runs into the issue of repeating the same instance back to back.
-//        var randomIndex:Int
-//        
-//        do {
-//            randomIndex = Int(arc4random_uniform(UInt32(myTigers.count)))
-//        } while currentIndex == randomIndex
-//        
-//        currentIndex = randomIndex
 
-// Shorthand code to the above code.
+    @IBAction func nextBarButtonPressed(sender: AnyObject) {
+// Calls the helper functions listed below
+        updateAnimal()
+        updateView()
+    }
+    
+// helpfer function switches between the "Tiger" and "Lion" arrays.
+    func updateAnimal(){
+        switch currentAnimal{
+        case ("Tiger",_):
+            var randomIndex = Int(arc4random_uniform(UInt32(myLions.count)))
+            currentAnimal = ("Lion",randomIndex)
+        default:
+            var randomIndex = Int(arc4random_uniform(UInt32(myTigers.count)))
+            currentAnimal = ("Tiger",randomIndex)
+        }
+    }
+    
+// helper function updates the image view
+    func updateView(){
         
-        var randomIndex = 0
-        for randomIndex = currentIndex; randomIndex == self.currentIndex; randomIndex = Int(arc4random_uniform(UInt32(myTigers.count))) {}
-        self.currentIndex = randomIndex
-        
-        let tiger = self.myTigers[randomIndex]
-        
-//        myImageView.image = tiger.image
-//        nameLabel.text = tiger.name
-//        myAgeLabel.text = "\(tiger.age)"
-//        myBreedLabel.text = tiger.breed
-        // Test comment - delete when you see this.
-        
-        // duration: how long should the duration be for the animaltion
-        // UIViewAnimationOptions is the type of animations
-        UIView.transitionWithView(self.view, duration: 1, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+        UIView.transitionWithView(self.view, duration: 2, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
             
-            self.myImageView.image = tiger.image
-            self.nameLabel.text = tiger.name
-            self.myBreedLabel.text = tiger.breed
-            self.myAgeLabel.text = "\(tiger.age)"
-            self.randomFactLabel.text = tiger.randomFact()
+            if self.currentAnimal.species == "Tiger" {
+                let tiger = self.myTigers[self.currentAnimal.index]
+                self.myImageView.image = tiger.image
+                self.nameLabel.text = tiger.name
+                self.myAgeLabel.text = "\(tiger.age)"
+                self.myBreedLabel.text = tiger.breed
+                self.randomFactLabel.text = tiger.randomFact()
+            } else if self.currentAnimal.species == "Lion" {
+                let lion = self.myLions[self.currentAnimal.index]
+                self.myImageView.image = lion.image
+                self.nameLabel.text = lion.name
+                self.myAgeLabel.text = "\(lion.age)"
+                self.myBreedLabel.text = lion.subSpecies
+                self.randomFactLabel.text = lion.randomFact()
+            }
+            
+            self.randomFactLabel.hidden = false
             
             }, completion: {
                 (finished: Bool) -> () in
         })
     }
 }
-
